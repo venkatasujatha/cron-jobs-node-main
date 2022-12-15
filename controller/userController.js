@@ -82,12 +82,7 @@ const updateAndDelete = async (req, res) => {
                  const resp1 = await user1.destroy({where:{
                     validity:"expiry"
                   }});
-                if(!resp1){
-                  console.log("users deleted")
-                }
-                else{
-                  console.log("users not deleted")
-                }
+               console.log("users deleted")
 
             }else{
                 console.log("null")
