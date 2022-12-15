@@ -5,13 +5,13 @@ const bodyparser = require('body-parser')
 const cors = require('cors')
 const router = require('./router/router')
 const cron = require('node-cron')
-const { deleteUser } = require('./controller/userController')
+const user1 = require('./model/user')
+//const { deleteUser } = require('./controller/userController')
+const  userController  = require('./controller/userController')
 require('dotenv').config()
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
-app.use('/', router)
 app.use(cors())
-//const { deleteUser } = require('./controller/userController')
 
 db.sync({ alter: true })
   .then(data => {
@@ -24,11 +24,10 @@ db.sync({ alter: true })
 async function run () {
   try {
     await db.authenticate()
-    console.log('datasource is initialized')
-    cron.schedule('*/30 * * * * *', deleteUser)
-
-    deleteUser()
-    console.log('deltete evry 60sec')
+     console.log('datasource is initialized')
+     app.use('/', router)
+     //cron.schedule('*/20 * * * * *', deleteUser)
+     cron.schedule('*/2 * * * * *', userController.updateAndDelete)
     app.listen(process.env.port, () => {
       console.log(`listening on port ${process.env.port}`)
     })

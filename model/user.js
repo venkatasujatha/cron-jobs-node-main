@@ -19,8 +19,7 @@ const user1 = db.define(
       allowNull: false
     },
     expiryDate: {
-      type: Sequelize.DATEONLY,
-      defaultValue: Date.now(),
+      type: Sequelize.DataTypes.STRING,
       allowNull: false
     },
     validity: {
