@@ -27,7 +27,7 @@ async function run () {
      console.log('datasource is initialized')
      app.use('/', router)
      //cron.schedule('*/20 * * * * *', deleteUser)
-     cron.schedule('*/2 * * * * *', userController.updateAndDelete)
+     cron.schedule('0 0 0 * * *', userController.updateAndDelete)
     app.listen(process.env.port, () => {
       console.log(`listening on port ${process.env.port}`)
     })
